@@ -39,11 +39,12 @@ def predict(request: ComplaintRequest, db: Session = Depends(get_db)):
     print("Prediction Results:")
     print(results)
 
-    save_prediction(
-        db,
-        complaint.id,
-        results
-    )
+    # Save prediction to database temporarily disabled
+# save_prediction(
+#     db,
+#     complaint.id,
+#     results
+# )
 
     print("Prediction saved successfully.")
 

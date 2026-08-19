@@ -21,6 +21,39 @@ encoder = joblib.load(
 
 
 def predict_feedback(text):
+    text_lower = text.lower()
+
+    complaint_words = [
+        "complaint",
+        "problem",
+        "issue",
+        "not happened",
+        "not working",
+        "delay",
+        "delayed",
+        "shortage",
+        "please take action",
+        "immediate action",
+        "waste",
+        "garbage"
+    ]
+
+    appreciation_words = [
+        "thank you",
+        "thanks",
+        "appreciate",
+        "excellent",
+        "great service",
+        "well done"
+    ]
+
+    if any(word in text_lower for word in appreciation_words):
+        return "Appreciation"
+
+    if any(word in text_lower for word in complaint_words):
+        return "Complaint"
+
     X = vectorizer.transform([text])
     prediction = model.predict(X)
+
     return str(encoder.inverse_transform(prediction)[0])
